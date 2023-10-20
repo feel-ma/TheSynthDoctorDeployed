@@ -49,7 +49,14 @@ const userSchema = new Schema(
     }],
     admin:{
       type: Boolean
-    }
+    },
+    messages: [{
+      name: String,
+      email: String,
+      phone: String,
+      subject: String,
+      message: String
+    }]
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`    
