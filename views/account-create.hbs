@@ -1,0 +1,42 @@
+<div class="login">
+  <div class="container d-flex flex-column justify-content-center align-items-center mt-5 mx-auto form-square" style="">
+    <img class="logo-brand" src="/images/logosynthDoctor.png" alt="The Synth Doctor">
+    <h2>Create an account</h2>
+    <form action="/create" method="post">
+      <div class="row mb-3">
+        <div class="col">  
+          <input type="text" placeholder="Name" name="name" id="name" class="form-control-lg">
+          <input type="text" placeholder="Lastname" name="surname" id="surname" class="form-control-lg">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <input type="username" placeholder="Username" name="username" id="username" class="form-control-lg">
+          <input type="tel" placeholder="Phone" name="phone" id="phone" class="form-control-lg">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <input type="email" placeholder="Email" name="email" id="email" class="form-control-lg">
+          <input type="email" placeholder="Confirm Email" name="email2" id="email2" class="form-control-lg">
+        </div>
+      </div>
+          <div class="row mb-3">
+        <div class="col">
+          <input type="password" placeholder="Password" name="password" id="password" class="form-control-lg">
+          <input type="password" placeholder="Confirm Password" name="password2" id="password2" class="form-control-lg">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col d-flex justify-content-center">
+          <input type="submit" value="Create new User" class="btn btn-primary btn-lg">
+        </div>
+      </div>
+      
+        {{#if errorMessage}}
+    <p class="error"> {{errorMessage}}</p>
+    {{/if}}
+    </form>
+
+  </div>
+</div>

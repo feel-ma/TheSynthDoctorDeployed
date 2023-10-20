@@ -1,0 +1,81 @@
+<div class="container">
+    <h1>Find me</h1>
+    <div class="row p-3">
+        <div class="col d-flex p-3">
+            <div>
+                <img class="icon" src="/images/icon-1.png" alt=""> 
+            </div>
+            <div class="p-3">
+                <h3>Address</h3>
+                <p>Genslerstraße 33, 13055 Berlin</p>
+                <img src="/images/c1.png" alt=""> 
+            </div>
+        </div>
+        <div class="col d-flex p-3">
+            <div>
+                <img class="icon" src="/images/icon-2.png" alt=""> 
+            </div>
+            <div class="p-3">
+                <h3>Email</h3>
+                <p><a style="color:black" class="plain" href="mailto:info@thesynthdoctor.de">info@thesynthdoctor.de</a></p>
+                <img src="/images/c2.png" alt="">
+            </div>
+
+        </div>
+        <div class="col d-flex p-3">
+            <div>
+                <img class="icon" src="/images/icon-3.png" alt=""> 
+            </div>
+            <div class="p-3">
+                <h3>Phone</h3>
+                <p>+49 152 3855 0087 </p>
+                
+                <img src="/images/c3.png" alt="">
+            </div>
+
+        </div>
+    </div>
+    <div class="row py-4 m-3">
+        <div class="col">
+            <form action="/contact" method="POST">
+                <div class="row">
+                    <div class="form-group col p-2">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Name" required>
+                    </div>
+                    <div class="form-group col p-2">
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col p-2">
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="Phone" required>
+                    </div>
+                    <div class="form-group col p-2">
+                        <input type="text" id="subject" name="subject" class="form-control" placeholder="Subject" required>
+                    </div>
+                </div>
+                <div class="form-group p-2">
+                    <textarea id="message" name="message" class="form-control" rows="5" placeholder="Message" required></textarea>
+                </div>
+                <div class="form-group p-2">
+                    <button type="submit" class="btn btn-danger">Submit</button>
+                </div>
+                
+            </form>
+        {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+        {{else}}
+        <p class="success">{{message}}</p>
+        {{/if}}
+        </div>
+        <div class="col">
+            <div style="overflow:hidden;height:300px;width:100%;">
+                <iframe src="https://www.google.com/maps/embed/v1/place?key={{gKey}}&q=Genslerstraße+33,+13055+Berlin" frameborder="0" allowfullscreen style="border:0;height:100%;width:100%;"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

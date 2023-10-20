@@ -1,0 +1,175 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.logo-brand {
+  width: 350px;
+}
+
+.header-class{
+  margin-bottom: 5px;
+}
+
+.nav-style{
+  border-bottom: 5px solid rgb(56, 114, 136);
+  border-radius: 5px;
+}
+
+
+.carousel-caption{
+  font-size: 30px;
+  background-color: rgba(56, 114, 136, 0.5);
+}
+
+.img-responsive{
+  height: 200px;
+}
+
+.spacing{
+  padding-top: 60px;
+}
+
+.image-container-size {
+  width: 500px;
+  margin: 20px;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #16161695; /* Set the initial color of the overlay */
+  opacity: 1; /* Set the initial opacity of the overlay */
+  transition: all 0.5s ease; /* Add a smooth transition effect */
+}
+
+.image-container:hover::before {
+  opacity: 0; /* Set the final opacity of the overlay */
+}
+.caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* set the background color and opacity of the caption */
+  color: #fff; /* set the font color of the caption */
+  font-size: 1.2rem; /* set the font size of the caption */
+  font-weight: bold; /* set the font weight of the caption */
+  padding: 10px; /* set the padding of the caption */
+  box-sizing: border-box; /* include the padding in the caption's width */
+  opacity: 0; /* set the initial opacity of the caption */
+  transition: all 0.5s ease; /* add a smooth transition effect */
+}
+
+.image-container:hover .caption {
+  opacity: 1; /* set the final opacity of the caption */
+}
+
+.color-gray {
+  background-color: rgb(59, 59, 59);
+  border-top: 10px solid rgb(56, 114, 136);
+  padding-bottom: 10px;
+  padding-top: 30px;
+}
+
+.plain{
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px dotted gray;
+}
+
+.li-none {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.login{
+  height: 70vh;
+  background-image: url('/images/loginbk.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.form-square{
+  padding: 30px 0px;
+  margin-top: 150px;
+}
+
+.icon{
+  width: 90px;
+}
+
+.error{
+  background-color: red;
+  color: black;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.success{
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.profile-header{
+  background-image: url('/images/bk-profile.jpg');
+  height: 27vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin-bottom: 30px;
+}
+
+.config-icon{
+  width: 50px;
+}
+
+.profile-anchor {
+  font-size: inherit;
+  text-decoration: none;
+  color: gray;
+}
+
+.successRepair{
+  height: 50vh;
+}
+.case-heading {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.case-description {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.statustable {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.statustable th, td {
+  width: 14.28%; /* Divide 100% by the number of columns (7 columns in this case) */
+}
+
+.max-ph{
+  max-height: 600px;
+}

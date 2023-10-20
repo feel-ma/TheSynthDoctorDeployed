@@ -1,0 +1,25 @@
+  <div class="container">
+    <h1 class="text-center">Welcome to our Blogs</h1>
+    <p class="lead text-center">Share your thoughts and ideas with the world!</p>
+    <div class="d-flex justify-content-center">
+      <a href="/create-blog" class="btn btn-primary mr-2">Create New Post</a>
+    </div>
+
+    <h2 class="mt-5">List of all blog posts</h2>
+
+    <div class="row">
+      {{#each blog}}
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">{{this.title}}</h5>
+            <p class="card-text">by {{this.author}}</p>
+            <a href="/blog/{{this._id}}" class="btn btn-primary">Read More</a>
+            <a href="/blog/{{this._id}}/edit" class="btn btn-primary">Edit</a>
+            <a href="/blog/{{this._id}}/delete" class="btn btn-primary">Delete</a>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>

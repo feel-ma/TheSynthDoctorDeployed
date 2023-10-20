@@ -1,0 +1,14 @@
+<div class="login">
+  <div class="container d-flex flex-column justify-content-center align-items-center mt-5 mx-auto form-square">
+        <img class="logo-brand" src="/images/logosynthDoctor.png" alt="The Synth Doctor">
+        <h2>Log In</h2>
+        <form action="/login" method="post" class="d-flex flex-column justify-content-center align-items-center">
+        <input type="text" placeholder="Username" name="username" id="username" class="form-control-lg row my-2">
+        <input type="password" placeholder="Password" name="password" id="password" class="form-control-lg row my-2">
+        <input type="submit" value="Login" class="btn btn-primary btn-lg row my-2">
+        </form>
+
+    {{#if errorMessage}}
+      <p class="error">{{errorMessage}}</p>
+    {{/if}}
+</div>

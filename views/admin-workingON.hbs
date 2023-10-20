@@ -1,0 +1,403 @@
+<div class="container mt-3 mb-3">
+  <div class="d-flex justify-content-between">
+    <form action="/admin/projects/workingOn" method="post">
+      <input type="hidden" name="caseIdPending" value="{{work._id}}">
+      <button type="submit" class="btn btn-primary">Accept repair</button>
+    </form>
+
+    <form action="/admin/projects/workingOn" method="post">
+      <input type="hidden" name="caseIdWorking" value="{{work._id}}">
+      <button type="submit" class="btn btn-primary">Close case</button>
+    </form>
+
+    <form action="/admin/projects/workingOn" method="post">
+      <input type="hidden" name="caseIdFinish" value="{{work._id}}">
+      <button type="submit" class="btn btn-primary">Ready</button>
+    </form>
+
+    <form action="/admin/projects/workingOn" method="post">
+      <input type="hidden" name="caseIdUser" value="{{work._id}}">
+      <button type="submit" class="btn btn-primary">Pending information</button>
+    </form>
+  </div>
+</div>
+ <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1 class="mt-4">Chronometer</h1>
+        <p id="time" class="mb-4">00:00:00</p>
+        <button class="btn btn-primary" onclick="start()">Start</button>
+        <button class="btn btn-primary" onclick="pause()">Pause</button>
+        <button class="btn btn-primary" onclick="save()">Save</button>
+        <p id="caseId" class="d-none" data-case-id="{{work._id}}">{{work._id}}</p>
+      </div>
+
+      <div class="col">
+        <h1>Status</h1>
+        <div class="status" data-status="{{work.status}}">.</div>
+      </div>
+
+      <div class="col">
+        <h1>Urgency</h1>
+        <div class="urgency" data-status="{{work.urgency}}">.</div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="container">
+  <div class="container mt-3 mb-3">
+  <div class="row">
+    <div class="col mx-auto ">
+      <strong>User:</strong> {{work.user}}
+    </div>
+    <div class="col mx-auto px-3">
+      <strong>Product Name:</strong> {{work.productName}}
+    </div>
+    <div class="col mx-auto px-3">
+      <strong>Brand:</strong> {{work.brand}}
+    </div>
+    <div class="col mx-auto px-3">
+      <strong>Drop-Off Date:</strong> {{work.dropOffDate}}
+    </div>
+    <div class="col mx-auto px-3">
+      <strong>Status:</strong> {{work.status}}
+    </div>
+    <div class="col mx-auto px-3">
+      <strong>Hours:</strong> 
+<script>
+    const totalSeconds = {{work.hours}};
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const formattedTime = ("0" + hours).slice(-2) + ":" + ("0" + minutes).slice(-2);
+    document.write(formattedTime);
+  </script>
+    </div>
+    <div class="col mx-auto px-3">
+      <strong>Calculated Price:</strong> {{work.calculatedPrice}}
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <h1 class="case-heading">CASE DESCRIPTION</h1>
+  <div class="case-description">{{work.description}}</div>
+</div>
+
+
+
+<div class="container mt-3">
+  <div>
+    <h1 class="case-heading">USED PARTS</h1>
+    <table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th  style="width: 35%">Name</th>
+      <th style="width: 35%">Manufacturer</th>
+      <th class="text-center align-middle" style="width: 10%">Price</th>
+      <th class="text-center align-middle" style="width: 10%">Count</th>
+      <th class="text-center align-middle" style="width: 10%">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each work.componentUsed}}
+    <tr>
+      <th scope="row">{{this.name}}</th>
+      <td>{{this.manu}}</td>
+      <td class="text-center align-middle">{{this.price}}</td>
+      <td class="text-center align-middle">{{this.count}}</td>
+      <td class="text-center align-middle">{{this.total}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+ <div class="row justify-content-end">
+    <div class="col-auto case-heading">
+      <div class="total">
+        Total {{totalUsed}}
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="container">
+  <div>
+    <h1 class="case-heading">REQUIRED PARTS</h1>
+     <table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th  style="width: 35%">Name</th>
+      <th style="width: 35%">Manufacturer</th>
+      <th class="text-center align-middle" style="width: 10%">Price</th>
+      <th class="text-center align-middle" style="width: 10%">Count</th>
+      <th class="text-center align-middle" style="width: 10%">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each work.componentRequired}}
+    <tr>
+      <th scope="row">{{this.name}}</th>
+      <td>{{this.manu}}</td>
+      <td class="text-center align-middle">{{this.price}}</td>
+      <td class="text-center align-middle">{{this.count}}</td>
+      <td class="text-center align-middle">{{this.total}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+ <div class="row justify-content-end">
+    <div class="col-auto">
+      <div class="total case-heading">
+        Total {{totalRequired}}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<div>
+    <h1 class="case-heading">COMMENTS</h1>
+{{#each work.comments}}
+<div>{{this.createdAt}}</div>
+  <div style="margin: 20px;">{{this}}</div>
+  {{/each}}
+</div>
+
+
+<div class="container mt-3">
+  <div class="row align-items-center">
+    <div class="col-md-6 ">
+      <h1 class="text-center case-heading">New comment</h1>
+      <form action="/admin/projects/workingOn" method="post">
+        <div class="form-group">
+          <textarea class="form-control" id="newComment" name="newComment" placeholder="Write new comment" rows="5"></textarea>
+        </div>
+        <input type="hidden" name="caseId" value="{{work._id}}">
+        <input type="submit" class="btn btn-primary btn-block" style="margin: 10px;" value="Submit">
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <h1 class="text-center case-heading">COMPONENT SEARCH</h1>
+      <form action="/componentsearch" method="post">
+        <div class="input-group">
+          <input type="text" class="form-control" name="component" />
+          <input type="hidden" name="caseId" value="{{work._id}}">
+          <div>
+            <input type="submit" class="btn btn-primary" style="margin: 10px;" value="Search" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h1 class="text-center case-heading"> Total Repair price</h1>
+  <div class="text-center case-heading"> {{totalTotal}} </div>
+</div>
+
+
+
+
+
+</div>
+
+
+<script>
+let startTime; // Variable to store the start time
+    let running = false; // Flag to indicate if the chronometer is running
+    let timer; // Variable to store the setInterval ID
+    
+
+    // Retrieve the start time from local storage, if available
+    const storedStartTime = localStorage.getItem("startTime");
+    if (storedStartTime) {
+      startTime = parseInt(storedStartTime);
+      running = true;
+      timer = setInterval(updateTime, 1000);
+    }
+
+    function start() {
+      if (!running) {
+        startTime = new Date().getTime();
+        localStorage.setItem("startTime", startTime.toString());
+        timer = setInterval(updateTime, 1000);
+        running = true;
+      }
+    }
+
+    function pause() {
+      if (running) {
+        clearInterval(timer);
+        running = false;
+        localStorage.removeItem("startTime");
+      }
+    }
+function save() {
+  if (running) {
+    clearInterval(timer);
+    running = false;
+    localStorage.removeItem("startTime");
+  }
+
+  const currentTime = document.getElementById("time").innerHTML;
+  const [hours, minutes, seconds] = currentTime.split(':');
+
+  const caseId = document.getElementById("caseId").dataset.caseId;
+
+  // Create a form dynamically
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = '/admin/projects/workingOn';
+
+  // Create an input field for each time component
+  const hoursInput = document.createElement('input');
+  hoursInput.type = 'hidden';
+  hoursInput.name = 'hours';
+  hoursInput.value = hours;
+
+  const minutesInput = document.createElement('input');
+  minutesInput.type = 'hidden';
+  minutesInput.name = 'minutes';
+  minutesInput.value = minutes;
+
+  const secondsInput = document.createElement('input');
+  secondsInput.type = 'hidden';
+  secondsInput.name = 'seconds';
+  secondsInput.value = seconds;
+
+  // Create an input field for the case ID
+  const caseIdInput = document.createElement('input');
+  caseIdInput.type = 'hidden';
+  caseIdInput.name = 'caseId';
+  caseIdInput.value = caseId;
+
+  // Append the input fields to the form
+  form.appendChild(hoursInput);
+  form.appendChild(minutesInput);
+  form.appendChild(secondsInput);
+  form.appendChild(caseIdInput);
+
+  // Append the form to the document body
+  document.body.appendChild(form);
+
+  // Submit the form
+  form.submit();
+}
+
+    function updateTime() {
+      const currentTime = new Date().getTime() - startTime;
+      let hours = Math.floor((currentTime / (1000 * 60 * 60)) % 24);
+      let minutes = Math.floor((currentTime / (1000 * 60)) % 60);
+      let seconds = Math.floor((currentTime / 1000) % 60);
+
+      hours = (hours < 10) ? "0" + hours : hours;
+      minutes = (minutes < 10) ? "0" + minutes : minutes;
+      seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+      document.getElementById("time").innerHTML = hours + ":" + minutes + ":" + seconds;
+    }
+</script>
+
+
+<script>
+
+function toggleTableP() {
+  let table = document.getElementById("pending-table");
+  if (table.style.display === "none") {
+    table.style.display = "table";
+  } else {
+    table.style.display = "none";
+  }
+}
+
+function toggleTableW() {
+  let table = document.getElementById("working-table");
+  if (table.style.display === "none") {
+    table.style.display = "table";
+  } else {
+    table.style.display = "none";
+  }
+}
+
+function toggleTableC() {
+  let table = document.getElementById("closed-table");
+  if (table.style.display === "none") {
+    table.style.display = "table";
+  } else {
+    table.style.display = "none";
+  }
+}
+
+function getStatusColor(status) {
+  switch (status) {
+    case 0:
+      return "blue";
+    case 1:
+      return "grey";
+    case 2:
+      return "yellow";
+          case 3:
+      return "red";
+    case 4:
+      return "orange";
+    case 5:
+      return "purple";
+    case 6:
+      return "red";
+    default:
+      return "black";
+  }
+}
+
+function checkStatus(statusDiv) {
+  let status = parseInt(statusDiv.dataset.status);
+  let color = getStatusColor(status);
+  statusDiv.style.backgroundColor = color;
+}
+
+function setInitialStatusColors() {
+  let statusDivs = document.getElementsByClassName("status");
+  for (let i = 0; i < statusDivs.length; i++) {
+    let statusDiv = statusDivs[i];
+    checkStatus(statusDiv);
+    //statusDiv.innerHTML = 'TEST';
+  }
+}
+
+function setInitialUrgencyColors() {
+  let urgencyDivs = document.getElementsByClassName("urgency");
+  for (let i = 0; i < urgencyDivs.length; i++) {
+    let urgencyDiv = urgencyDivs[i];
+    checkUrgency(urgencyDiv);
+    //urgencyDiv.innerHTML = 'TEST';
+  }
+}
+
+function checkUrgency(urgencyDiv) {
+  let status = parseInt(urgencyDiv.dataset.status);
+  let color = getUrgencyColor(status);
+  urgencyDiv.style.backgroundColor = color;
+}
+
+
+function getUrgencyColor(urgency) {
+  switch (urgency) {
+    case 1:
+      return "green";
+    case 2:
+      return "yellow";
+    case 3:
+      return "red";
+}
+}
+
+setInitialStatusColors()
+setInitialUrgencyColors()
+</script>

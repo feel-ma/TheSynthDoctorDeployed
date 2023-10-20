@@ -1,0 +1,21 @@
+<div class="container successRepair">
+
+{{#if repairErrorMessage}}
+<div class="alert alert-danger" role="alert">
+  {{repairErrorMessage}} Please, go to your <a href="/user-profile" class="alert-link">profile</a> and try it again.
+</div>
+
+{{else}}
+
+<div class="alert alert-success  my-3" role="alert">
+  {{repairMessage}} Go back to your <a href="/user-profile" class="alert-link">profile</a>
+</div>
+
+{{/if}}
+
+</div>
+
+
+
+
+

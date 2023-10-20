@@ -1,0 +1,21 @@
+<div class="container my-4">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title">{{ blog.title }}</h1>
+      <h6 class="card-subtitle mb-2 text-muted">Written by {{ blog.author }}</h6>
+      <hr>
+      <img src="{{ blog.image }}" alt="Blog Image" class="img-fluid">
+      <p class="card-text">{{ blog.content }}</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  const blogImage = '{{ blog.image }}';
+  if (blogImage) {
+    console.log(blogImage);
+  } else {
+    console.log('No image URL found.');
+  }
+</script>

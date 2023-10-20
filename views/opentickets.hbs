@@ -1,0 +1,12 @@
+<h1>Welcome to open tickets</h1>
+
+{{#if !openTickets}}
+<p>Sorry! You don't have any open tickets yet</p>
+
+{{else}}
+
+  {{#each openTickets}}
+    <p>{{this}}</p>
+  {{/each}}
+
+{{/if}}

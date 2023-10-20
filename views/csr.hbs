@@ -1,0 +1,65 @@
+<div class="d-flex align-items-center">
+  <table class="table table-hover mx-auto">
+  <thead>
+    <tr>
+      <th class="text-center">Image</th>
+      <th class="text-center">Name</th>
+      <th class="text-center">Price</th>
+      <th class="text-center">How many</th>
+      <th class="text-center">Used</th>
+      <th class="text-center">How many</th>
+      <th class="text-center">Required</th>
+    </tr>
+  </thead>
+  <tbody>
+   {{#each result}}
+<tr>
+  <td class="text-center align-middle"><img src="{{this.ImagePath}}" width="70px"></td>
+  <td class=" align-middle">
+    {{this.Description}}
+    {{#if this.DataSheetUrl}}
+    <a href="{{this.DataSheetUrl}}" target="_blank"> Datasheet</a>
+    {{/if}}
+  </td>
+  <td class="text-center align-middle">
+    {{#if this.PriceBreaks}}
+      {{this.PriceBreaks.[0].Price}}
+    {{else}}
+      N/A
+    {{/if}}
+  </td>
+  <td class="text-center align-middle">
+     <form action="/admin/projects/workingOn" method="post" class="add-to-used-parts-form">
+          <div class="form-group">
+            <input type="number" class="form-control form-control-sm d-flex justify-content-center align-items-center" name="count" placeholder="Count" style="max-width: 100px; height: 100%;">
+           
+          </div>
+          <input type="hidden" name="img" value="{{this.ImagePath}}">
+          <input type="hidden" name="ma" value="{{this.Manufacturer}}">
+          <input type="hidden" name="pn" value="{{this.ManufacturerPartNumber}}">
+          <input type="hidden" name="pr" value="{{this.PriceBreaks.[0].Price}}"  class="form-control form-control-sm d-flex justify-content-center align-items-center">
+          <input type="hidden" name="caseIdP" value="{{../caseId}}">
+  </td>
+  <td class="text-center align-middle">     <button type="submit" class="btn btn-sm btn-primary">Add to Used</button>
+        </form></td>
+          <td class="text-center align-middle">
+     <form action="/admin/projects/workingOn" method="post" class="add-to-used-parts-form">
+          <div class="form-group">
+           <input type="number" class="form-control form-control-sm d-flex justify-content-center align-items-center" name="count" placeholder="Count" style="max-width: 100px; height: 100%;">
+           
+          </div>
+          <input type="hidden" name="img" value="{{this.ImagePath}}">
+          <input type="hidden" name="ma" value="{{this.Manufacturer}}">
+          <input type="hidden" name="pn" value="{{this.ManufacturerPartNumber}}">
+          <input type="hidden" name="pr" value="{{this.PriceBreaks.[0].Price}}">
+          <input type="hidden" name="caseIdPR" value="{{../caseId}}">
+  </td>
+  <td class="text-center align-middle">     <button type="submit" class="btn btn-sm btn-danger">Add to Required</button>
+        </form></td>
+</tr>
+{{/each}}
+  </tbody>
+</table>
+
+
+</div>

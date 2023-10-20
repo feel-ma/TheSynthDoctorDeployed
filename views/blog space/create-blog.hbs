@@ -1,0 +1,37 @@
+<div class="container my-4">
+  <h2 style="text-align: center;">Create a new blog post</h2>
+  <hr>
+  <hr>
+  <form action="/create-blog" method="POST">
+    <div class="form-group">
+      <label for="author">
+        <h3>Your Name</h3>
+      </label><br>
+      <input type="text" id="author" name="author" class="form-control" placeholder="Your Name">
+    </div><br>
+
+    <div class="form-group">
+      <label for="title">
+        <h3>Title</h3>
+      </label><br>
+      <input type="text" id="title" name="title" class="form-control" placeholder="Whats the title of the piece">
+    </div><br>
+
+    <div class="form-group">
+      <label for="content">
+        <h3>Content</h3>
+      </label><br>
+      <textarea id="content" name="content" class="form-control"
+        placeholder="What do you want to write about"></textarea>
+    </div><br>
+
+    <div class="form-group">
+      <label for="image">
+        <h3>Image URL</h3>
+      </label><br>
+      <input type="text" id="image" name="image" class="form-control" placeholder="Enter the URL of the image">
+    </div><br>
+
+    <button type="submit" class="btn btn-primary">Create Blog-Post</button>
+  </form>
+</div>
