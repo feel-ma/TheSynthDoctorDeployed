@@ -67,7 +67,7 @@ router.post("/create", async (req, res, next) => {
       username: newUser.username,
       email: newUser.email,
       password: newUser.password,
-      admin:true
+      //admin:true
     });
     // req.session.userId = newUser._id;
     res.render("login", { gKey });
