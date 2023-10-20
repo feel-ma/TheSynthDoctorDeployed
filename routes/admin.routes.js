@@ -23,7 +23,7 @@ router.get("/projects",  isAdmin, async (req, res, next) => {
   const pending = [];
   const active = [];
   const closed = [];
-  const messages = []
+  let messages = []
 
   const admin = await User.findOne({ email: "fmelectronicsbln@gmail.com" }); 
 
