@@ -32,7 +32,7 @@ let isRouteRunning = false;
 router.post('/contact', async (req, res) => {
   const { name, email, phone, subject, message } = req.body;
   try {
-    const admin = await Admin.findOne({ email: "notbatman@batman.not" }); 
+    const admin = await User.findOne({ email: "fmelectronicsbln@gmail.com" }); 
 
     admin.messages.push({ name, email, phone, subject, message });
     await admin.save();
