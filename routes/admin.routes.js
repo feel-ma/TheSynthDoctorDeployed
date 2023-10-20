@@ -17,10 +17,15 @@ router.get("/", isAdmin,  (req, res, next) => {
   res.render("admin");
 });
 
-router.get("/projects",  isAdmin, (req, res, next) => {
+router.get("/projects",  isAdmin, async (req, res, next) => {
   const pending = [];
   const active = [];
   const closed = [];
+  const messages = []
+
+  const admin = await User.findOne({ email: "fmelectronicsbln@gmail.com" }); 
+
+  messages = admin.messages
 
   Repair.find().then((result) => {
     for (one of result) {
@@ -29,7 +34,7 @@ router.get("/projects",  isAdmin, (req, res, next) => {
       else if (one.status == 2 || one.status == 3) active.push(one);
       else if (one.status == 4) closed.push(one);
     }
-    res.render("admin-projects", { pending, active, closed });
+    res.render("admin-projects", { pending, active, closed, messages });
   });
 });
 

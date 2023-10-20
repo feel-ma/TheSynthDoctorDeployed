@@ -119,6 +119,33 @@
 
 </div>
 
+<div>
+ <table class="table" id="closed-table">
+    <thead>
+        <tr>
+            <th>name</th>
+            <th>email</th>
+            <th>phone</th>
+            <th>subject</th>
+            <th>message</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {{#each messages}}
+    <tr>
+          <td>{{this.name}}</td>
+          <td>{{this.email}}</td>
+         <td>{{this.phone}}</td>
+          <td>{{this.subject}}</td>
+           <td>{{this.message}}</td>
+    </tr>
+    
+    {{/each}}  
+      </tbody>
+</table>
+</div>
+
 <script>
 
 function toggleTableP() {
