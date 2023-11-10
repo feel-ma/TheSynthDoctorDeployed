@@ -27,7 +27,7 @@ Welcome to TheSynthDoctor, your go-to platform for seamless synthesizer repairs.
 
 Explore TheSynthDoctor:
 
-- [Visit TheSynthDoctor Website](#) (Note: The website is currently in development and will be live soon.)
+- [Visit TheSynthDoctor Website](https://www.thesynthdoctor.de/) (Note: The website is currently in development and will be live soon.)
 - [Test Account Access](#) (Feel free to explore the features using the provided test account credentials.)
 
 Your feedback and insights are highly valued as they contribute to enhancing the functionality and user experience of this cutting-edge application.
