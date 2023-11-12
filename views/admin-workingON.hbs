@@ -1,23 +1,33 @@
 <div class="container mt-3 mb-3">
   <div class="d-flex justify-content-between">
     <form action="/admin/projects/workingOn" method="post">
-      <input type="hidden" name="caseIdPending" value="{{work._id}}">
+      <input type="hidden" name="caseAccept" value="{{work._id}}">
       <button type="submit" class="btn btn-primary">Accept repair</button>
     </form>
 
     <form action="/admin/projects/workingOn" method="post">
-      <input type="hidden" name="caseIdWorking" value="{{work._id}}">
+      <input type="hidden" name="caseClose" value="{{work._id}}">
       <button type="submit" class="btn btn-primary">Close case</button>
     </form>
 
     <form action="/admin/projects/workingOn" method="post">
-      <input type="hidden" name="caseIdFinish" value="{{work._id}}">
+      <input type="hidden" name="caseFinish" value="{{work._id}}">
       <button type="submit" class="btn btn-primary">Ready</button>
     </form>
 
     <form action="/admin/projects/workingOn" method="post">
-      <input type="hidden" name="caseIdUser" value="{{work._id}}">
+      <input type="hidden" name="casePending" value="{{work._id}}">
       <button type="submit" class="btn btn-primary">Pending information</button>
+    </form>
+ 
+      <form action="/admin/projects/workingOn" method="post">
+      <input type="hidden" name="caseDelivered" value="{{work._id}}">
+      <button type="submit" class="btn btn-primary">Delivered</button>
+    </form>
+
+      <form action="/admin/projects/workingOn" method="post">
+      <input type="hidden" name="caseInProgress" value="{{work._id}}">
+      <button type="submit" class="btn btn-primary">In Progress</button>
     </form>
   </div>
 </div>
@@ -49,7 +59,13 @@
   <div class="container mt-3 mb-3">
   <div class="row">
     <div class="col mx-auto ">
-      <strong>User:</strong> {{work.user}}
+ <form action="/admin/projects/userInfo" method="post">
+      <input type="hidden" name="userInfo" value="{{work.user}}">
+      <strong> User:</strong>
+      <button type="submit" class="btn btn-primary">{{work.user}}</button>
+    </form>
+
+     {{!--  <strong>User:</strong> {{work.user}} --}}
     </div>
     <div class="col mx-auto px-3">
       <strong>Product Name:</strong> {{work.productName}}
@@ -58,7 +74,7 @@
       <strong>Brand:</strong> {{work.brand}}
     </div>
     <div class="col mx-auto px-3">
-      <strong>Drop-Off Date:</strong> {{work.dropOffDate}}
+      <strong>Drop-Off Date:</strong> {{work.droppOffDate}}
     </div>
     <div class="col mx-auto px-3">
       <strong>Status:</strong> {{work.status}}

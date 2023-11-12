@@ -49,11 +49,11 @@ router.get("/prices", (req, res, next) => {
 });
 
 router.get("/projects", (req, res, next) => {
-  res.render("projects");
+  res.render("projects", {gKey, userInSession: req.session.currentUser});
 })
 
 router.get("/about", (req, res, next) => {
-  res.render("about");
+  res.render("about" ,{gKey ,userInSession: req.session.currentUser});
 })
 
 
@@ -69,7 +69,7 @@ router.get("/about", (req, res, next) => {
     });
   }
   else{
-    res.render("about", {gKey});
+    res.render("about", {gKey, userInSession: req.session.currentUser});
   }
   
 });
@@ -93,7 +93,7 @@ router.post("/componentsearch", async (req, res) => {
     const data = response.data; // parse the JSON response
    
     
-    res.render("csr", {result: data.SearchResults.Parts, caseId: req.body.caseId} );
+    res.render("csr", {result: data.SearchResults.Parts, caseId: req.body.caseId, userInSession: req.session.currentUser} );
   } catch (error) {
     console.log(error);
     res.render("csr", {

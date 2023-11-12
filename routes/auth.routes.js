@@ -157,7 +157,7 @@ router.post("/logout", (req, res, next) => {
 });
 
 router.get("/repair", (req, res) => {
-  res.render("success", { gKey });
+  res.render("success", { gKey, userInSession: req.session.currentUser });
 });
 
 router.post("/repair", async (req, res) => {
@@ -165,7 +165,7 @@ router.post("/repair", async (req, res) => {
     const newRepair = req.body;
     console.log(newRepair);
     await Repair.create(newRepair);
-    res.render("success", {gKey, repairMessage: "Form submitted successfully!" });
+    res.render("success", {gKey, repairMessage: "Form submitted successfully!" , userInSession: req.session.currentUser});
   } catch (error) {
     console.log(error);
   }

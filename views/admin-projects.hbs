@@ -24,11 +24,11 @@
             </td>
          <td>{{this.brand}}</td>
           <td>
-             <div class="urgency" data-status="{{this.urgency}}"> . </div>
+             <div class="urgency" data-status="{{this.urgency}}"> {{this.urgency}} </div>
 </td> 
 
 <td>
-   <div class="status" data-status="{{this.status}}" height="20px" width="20px"> .</div>
+   <div class="status" data-status="{{this.status}}" height="20px" width="20px"> {{this.status}}</div>
 
 </td> 
            <td>{{this.droppOffDate}}</td>
@@ -119,32 +119,6 @@
 
 </div>
 
-<div>
- <table class="table" id="closed-table">
-    <thead>
-        <tr>
-            <th>name</th>
-            <th>email</th>
-            <th>phone</th>
-            <th>subject</th>
-            <th>message</th>
-        </tr>
-    </thead>
-    <tbody>
-
-    {{#each messages}}
-    <tr>
-          <td>{{this.name}}</td>
-          <td>{{this.email}}</td>
-         <td>{{this.phone}}</td>
-          <td>{{this.subject}}</td>
-           <td>{{this.message}}</td>
-    </tr>
-    
-    {{/each}}  
-      </tbody>
-</table>
-</div>
 
 <script>
 

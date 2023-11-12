@@ -16,7 +16,7 @@ function calculateHoursAndMinutes(totalSeconds) {
 
 /* GET home page */
 router.get("/", isAdmin,  (req, res, next) => {
-  res.render("admin");
+  res.render("admin", {userInSession: req.session.currentUser});
 });
 
 router.get("/projects",  isAdmin, async (req, res, next) => {
@@ -36,7 +36,7 @@ router.get("/projects",  isAdmin, async (req, res, next) => {
       else if (one.status == 2 || one.status == 3) active.push(one);
       else if (one.status == 4) closed.push(one);
     }
-    res.render("admin-projects", { pending, active, closed, messages });
+    res.render("admin-projects", { pending, active, closed, messages , userInSession: req.session.currentUser});
   });
 });
 
@@ -68,7 +68,7 @@ router.post("/projects", (req, res, next) => {
 });
 
 router.get("/projects/workingOn",  isAdmin, (req, res, next) => {
-  res.render("admin-workingON");
+  res.render("admin-workingON", {userInSession: req.session.currentUser});
 });
 
 router.post("/projects/workingOn", async (req, res, next) => {
@@ -115,7 +115,7 @@ router.post("/projects/workingOn", async (req, res, next) => {
   
         totalTotal = totalRequired + totalUsed +( hours * priceH + minutes * priceM);
   
-        res.render("admin-workingON", { work, totalRequired, totalUsed, totalTotal });
+        res.render("admin-workingON", { work, totalRequired, totalUsed, totalTotal , userInSession: req.session.currentUser  });
       })
       .catch((error) => {
         // Handle any errors that occur during the process
@@ -123,9 +123,9 @@ router.post("/projects/workingOn", async (req, res, next) => {
       });
   }
   
-  if(req.body.caseIdPending){
-    Repair.findByIdAndUpdate(req.body.caseIdPending,  { status: 2 }).then(()=>{
-      Repair.findById(req.body.caseIdPending).then((work) => {
+  if(req.body.caseAccept){
+    Repair.findByIdAndUpdate(req.body.caseAccept,  { status: 1 }).then(()=>{
+      Repair.findById(req.body.caseAccept).then((work) => {
         let totalUsed=0 
         let totalRequired=0
         let totalTotal=0
@@ -150,13 +150,13 @@ router.post("/projects/workingOn", async (req, res, next) => {
   
   
   
-        res.render("admin-workingON", { work, totalRequired, totalUsed , totalTotal });
+        res.render("admin-workingON", { work, totalRequired, totalUsed , totalTotal, userInSession: req.session.currentUser });
       });
     })
   }
-  if(req.body.caseIdWorking){
-    Repair.findByIdAndUpdate(req.body.caseIdWorking,  { status: 6 }).then(()=>{
-      Repair.findById(req.body.caseIdWorking).then((work) => {
+  if(req.body.caseClose){
+    Repair.findByIdAndUpdate(req.body.caseClose,  { status: 6 }).then(()=>{
+      Repair.findById(req.body.caseClose).then((work) => {
         let totalUsed=0 
         let totalRequired=0
         let totalTotal=0
@@ -179,14 +179,14 @@ router.post("/projects/workingOn", async (req, res, next) => {
 
   
   
-        res.render("admin-workingON", { work, totalRequired, totalUsed , totalTotal });
+        res.render("admin-workingON", { work, totalRequired, totalUsed , totalTotal , userInSession: req.session.currentUser });
       });
     })
   }
 
-    if(req.body.caseIdUser){
-      Repair.findByIdAndUpdate(req.body.caseIdUser,  { status: 5 }).then(()=>{
-        Repair.findById(req.body.caseIdUser).then((work) => {
+    if(req.body.casePending){
+      Repair.findByIdAndUpdate(req.body.casePending,  { status: 5 }).then(()=>{
+        Repair.findById(req.body.casePending).then((work) => {
           let totalUsed=0 
           let totalRequired=0
           let totalTotal=0
@@ -210,14 +210,14 @@ router.post("/projects/workingOn", async (req, res, next) => {
     
     
     
-          res.render("admin-workingON", { work, totalRequired, totalUsed , totalTotal });
+          res.render("admin-workingON", { work, totalRequired, totalUsed , totalTotal  , userInSession: req.session.currentUser });
         });
       })
     }
 
-    if(req.body.caseIdFinish){
-      Repair.findByIdAndUpdate(req.body.caseIdFinish,  { status: 4 }).then(()=>{
-        Repair.findById(req.body.caseIdFinish).then((work) => {
+    if(req.body.caseFinish){
+      Repair.findByIdAndUpdate(req.body.caseFinish,  { status: 4 }).then(()=>{
+        Repair.findById(req.body.caseFinish).then((work) => {
           let totalUsed=0 
           let totalRequired=0
           let totalTotal=0
@@ -240,12 +240,68 @@ router.post("/projects/workingOn", async (req, res, next) => {
 
     
     
-          res.render("admin-workingON", { work, totalRequired, totalUsed , totalTotal });
+          res.render("admin-workingON", { work, totalRequired, totalUsed , totalTotal  , userInSession: req.session.currentUser });
         });
       })
     }
+    if(req.body.caseDelivered){
+      Repair.findByIdAndUpdate(req.body.caseDelivered,  { status: 2 }).then(()=>{
+        Repair.findById(req.body.caseDelivered).then((work) => {
+          let totalUsed=0 
+          let totalRequired=0
+          let totalTotal=0
+          
+    
+          for(part of work.componentRequired){
+            totalRequired+=part.total
+          }
+    
+          for(part of work.componentUsed){
+            totalUsed+=part.total
+          }
+    
+          const { hours, minutes } = calculateHoursAndMinutes(work.hours);
+  const priceH=60
+  const priceM=1
 
+  // Calculate the total money
+  totalTotal = totalRequired + totalUsed + hours * priceH + minutes * priceM;
 
+    
+    
+          res.render("admin-workingON", { work, totalRequired, totalUsed , totalTotal  , userInSession: req.session.currentUser });
+        });
+      })
+    }
+    if(req.body.caseInProgress){
+      Repair.findByIdAndUpdate(req.body.caseInProgress,  { status: 3 }).then(()=>{
+        Repair.findById(req.body.caseInProgress).then((work) => {
+          let totalUsed=0 
+          let totalRequired=0
+          let totalTotal=0
+          
+    
+          for(part of work.componentRequired){
+            totalRequired+=part.total
+          }
+    
+          for(part of work.componentUsed){
+            totalUsed+=part.total
+          }
+    
+          const { hours, minutes } = calculateHoursAndMinutes(work.hours);
+  const priceH=60
+  const priceM=1
+
+  // Calculate the total money
+  totalTotal = totalRequired + totalUsed + hours * priceH + minutes * priceM;
+
+    
+    
+          res.render("admin-workingON", { work, totalRequired, totalUsed , totalTotal  , userInSession: req.session.currentUser });
+        });
+      })
+    }
 
   if (req.body.newComment) {
     const existingRepair = await Repair.findById(req.body.caseId);
@@ -274,7 +330,7 @@ router.post("/projects/workingOn", async (req, res, next) => {
     await existingRepair.save();
 
     Repair.findById(req.body.caseIdP).then((work) => {
-      res.render("admin-workingON", { work });
+      res.render("admin-workingON", { work  , userInSession: req.session.currentUser });
     });
   }
 
@@ -299,7 +355,7 @@ router.post("/projects/workingOn", async (req, res, next) => {
     await existingRepair.save();
 
     Repair.findById(req.body.caseIdPR).then((work) => {
-      res.render("admin-workingON", { work });
+      res.render("admin-workingON", { work   , userInSession: req.session.currentUser});
     });
   }
 
@@ -325,7 +381,7 @@ router.post("/projects/workingOn", async (req, res, next) => {
         totalTotal = totalRequired + totalUsed + hours * priceH + minutes * priceM;
       
   
-        res.render("admin-workingON", { work, totalRequired, totalUsed, totalTotal });
+        res.render("admin-workingON", { work, totalRequired, totalUsed, totalTotal  , userInSession: req.session.currentUser });
     });
   }
 
