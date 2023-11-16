@@ -388,5 +388,24 @@ router.post("/projects/workingOn", async (req, res, next) => {
  
 });
 
+
+router.post("/userinfo", async (req, res, next) => {
+  try {
+    console.log("Received request");
+    console.log(req.body); // Log the received data
+    const { userInfo } = req.body;
+
+    User.findById(userInfo).then((user) => {
+      res.render("userInfo", { user });
+    });
+
+    // ... rest of the code (if any)
+
+  } catch (error) {
+    console.error("Error in /userinfo route:", error);
+    next(error);
+  }
+});
+
 module.exports = router;
 
