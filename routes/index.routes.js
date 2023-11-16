@@ -56,6 +56,15 @@ router.get("/about", (req, res, next) => {
   res.render("about" ,{gKey ,userInSession: req.session.currentUser});
 })
 
+router.get("/why", (req, res, next) => {
+  res.render("why" ,{gKey ,userInSession: req.session.currentUser});
+})
+
+router.get("/mixer", (req, res, next) => {
+  res.render("services-details" ,{gKey ,userInSession: req.session.currentUser});
+})
+
+
 
 router.get("/about", (req, res, next) => {
 
@@ -101,6 +110,8 @@ router.post("/componentsearch", async (req, res) => {
     });
   } 
 });
+
+
 
 
 module.exports = router;

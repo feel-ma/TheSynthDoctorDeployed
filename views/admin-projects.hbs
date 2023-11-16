@@ -9,7 +9,7 @@
             <th>Urgency</th>
             <th>Stuatus</th>
             <th>Delivery Date</th>
-            <th>Action</th>
+        {{!--     <th>Action</th> --}}
         </tr>
     </thead>
     <tbody>
@@ -32,13 +32,13 @@
 
 </td> 
            <td>{{this.droppOffDate}}</td>
-           <td>
+{{!--            <td>
             <form action="/admin/projects" method="post">
             <input type="hidden" name="caseIdPending" value="{{this._id}}">
             <button type="submit" class="btn btn-primary">Accept repair</button>
             </form>
            </td>
-      
+       --}}
     </tr>
     
     {{/each}}  
@@ -57,7 +57,7 @@
             <th>Hours</th>
             <th>Calculated Price</th>
             <th>Status</th>
-             <th>Action</th>
+          {{!--    <th>Action</th> --}}
         </tr>
     </thead>
     <tbody>
@@ -75,12 +75,12 @@
 <td>
                         <div class="status" data-status="{{this.status}}">{{this.status}}</div>
                     </td>
-            <td>
+{{!--             <td>
             <form action="/admin/projects" method="post">
             <input type="hidden" name="caseIdWorking" value="{{this._id}}">
             <button type="submit" class="btn btn-primary">Close case</button>
             </form>
-           </td>
+           </td> --}}
     </tr>
     
     {{/each}}  

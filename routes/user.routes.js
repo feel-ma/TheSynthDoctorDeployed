@@ -1,11 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
 const mongoose = require('mongoose');
 const Repair = require("../models/Repair.model");
 const User = require("../models/User.model");
 const Admin = require('../models/Admin.model');
 
+
+
 const gKey= process.env.MAP_API;
+const mail= process.env.MAIL;
+const passwordMail= process.env.PASSWORDMAIL;
 
 const { isLoggedIn, isLoggedOut, isUser } = require("../middleware/route-guard.js");
 
@@ -30,23 +36,35 @@ router.get('/contact', (req, res) => {
 let isRouteRunning = false;
 
 router.post('/contact', async (req, res) => {
-  const { name, email, phone, subject, message } = req.body;
-  try {
-    const admin = await User.findOne({ email: "fmelectronicsbln@gmail.com" }); 
+  const { name, email, message, phone,subject  } = req.body;
 
-    admin.messages.push({ name, email, phone, subject, message });
-    await admin.save();
-
-    res.render("contact", { gKey, message: 'Form submitted successfully! The Synth Doctor is on it :)' });
-  } 
-  catch (error) {
-    if (error instanceof mongoose.Error.ValidationError) {
-      res.status(500).render("contact", { gKey, errorMessage: error.message });
-    } else if (error.code === 11000) {
-      res.status(500).render("contact", { gKey, errorMessage: "Error. Please try again" });
+  // Send email using nodemailer
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.goneo.de',
+    port: 465,
+    secure: true, 
+    auth: {
+        user: mail,
+        pass: 'R3qu3sts1!'
     }
-  }
-  isRouteRunning = true;
+});
+  const mailOptions = {
+      from: `${mail}`,
+      to: `${mail}`,
+      subject: 'New Request',
+      text: `Name: ${name}\nPhone: ${phone}\nSubject: ${subject}\nEmail: ${email}\nMessage: ${message}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          console.error(error);
+          res.status(500).send('Internal Server Error');
+      } else {
+          console.log('Email sent: ' + info.response);
+          res.send('Form submitted successfully!');
+      }
+    })
+
 });
 
 
